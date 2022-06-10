@@ -10,5 +10,9 @@ public:
 public:
 	wxButton* m_btn = nullptr;
 	wxTextCtrl* m_txt = nullptr;
+
+	wxDECLARE_EVENT_TABLE();
+	void OnButtonClicked(wxCommandEvent& evt);
+
 };
 
