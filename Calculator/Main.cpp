@@ -1,45 +1,41 @@
 #include "Main.h"
 #include "ButtonFactory.h"
+#include "CalculatorProcessor.h"
 
 wxBEGIN_EVENT_TABLE(Main, wxFrame)
-	EVT_BUTTON(21, Main::OnButtonClicked)
-	EVT_BUTTON(20, Main::OnButtonClicked)
-	EVT_BUTTON(19, Main::OnButtonClicked)
-	EVT_BUTTON(18, Main::OnButtonClicked)
-	EVT_BUTTON(17, Main::OnButtonClicked)
-	EVT_BUTTON(1, Main::OnButtonClicked)
-	EVT_BUTTON(2, Main::OnButtonClicked)
-	EVT_BUTTON(3, Main::OnButtonClicked)
-	EVT_BUTTON(4, Main::OnButtonClicked)
-	EVT_BUTTON(5, Main::OnButtonClicked)
-	EVT_BUTTON(6, Main::OnButtonClicked)
-	EVT_BUTTON(7, Main::OnButtonClicked)
-	EVT_BUTTON(8, Main::OnButtonClicked)
-	EVT_BUTTON(9, Main::OnButtonClicked)
-	EVT_BUTTON(10, Main::OnButtonClicked)
-	EVT_BUTTON(11, Main::OnButtonClicked)
-	EVT_BUTTON(12, Main::OnButtonClicked)
-	EVT_BUTTON(13, Main::OnButtonClicked)
-	EVT_BUTTON(14, Main::OnButtonClicked)
-	EVT_BUTTON(15, Main::OnButtonClicked)
-	EVT_BUTTON(16, Main::OnButtonClicked)
+EVT_BUTTON(21, Main::OnButtonClicked)
+EVT_BUTTON(20, Main::OnButtonClicked)
+EVT_BUTTON(19, Main::OnButtonClicked)
+EVT_BUTTON(18, Main::OnButtonClicked)
+EVT_BUTTON(17, Main::OnButtonClicked)
+EVT_BUTTON(1, Main::OnButtonClicked)
+EVT_BUTTON(2, Main::OnButtonClicked)
+EVT_BUTTON(3, Main::OnButtonClicked)
+EVT_BUTTON(4, Main::OnButtonClicked)
+EVT_BUTTON(5, Main::OnButtonClicked)
+EVT_BUTTON(6, Main::OnButtonClicked)
+EVT_BUTTON(7, Main::OnButtonClicked)
+EVT_BUTTON(8, Main::OnButtonClicked)
+EVT_BUTTON(9, Main::OnButtonClicked)
+EVT_BUTTON(10, Main::OnButtonClicked)
+EVT_BUTTON(11, Main::OnButtonClicked)
+EVT_BUTTON(12, Main::OnButtonClicked)
+EVT_BUTTON(13, Main::OnButtonClicked)
+EVT_BUTTON(14, Main::OnButtonClicked)
+EVT_BUTTON(15, Main::OnButtonClicked)
+EVT_BUTTON(16, Main::OnButtonClicked)
 wxEND_EVENT_TABLE()
+int num1, num2;
+wxString _num1 = "";
+wxString _num2 = "";
+bool symbol = false;
+wxString sym = "";
 
 Main::Main() : wxFrame(nullptr, wxID_ANY, "Calculator - wxwidgets!", wxPoint(30,30), wxSize(265,445))
 {
 	ButtonFactory factory;
 	//ButtonFactory cMain = ButtonFactory(this);
 	m_txt = new wxTextCtrl(this, 100, "", wxPoint(10, 20), wxSize(230, 35));
-
-	//old
-	/*m_btn = cMain.ButtonZero();
-	m_btn = cMain.ButtonOne();
-	m_btn = cMain.ButtonThree();
-	m_btn = cMain.ButtonFour();
-	m_btn = cMain.ButtonFive();
-	m_btn = cMain.ButtonSix();
-	m_btn = cMain.ButtonSeven();
-	m*/
 
 	m_btn = factory.CreateButton(this, 20, "Deci", wxPoint(10, 70), wxSize(50, 50));
 	m_btn = factory.CreateButton(this, 19, "Hex", wxPoint(70, 70), wxSize(50, 50));
@@ -76,52 +72,166 @@ Main::~Main()
 
 void Main::OnButtonClicked(wxCommandEvent& evt)
 {
+	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
 	int id = evt.GetId();
+	/*if (evt.GetId() >= 1 && evt.GetId() < 10 && evt.GetId() == 14)
+	{
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
+	}*/
 	switch (id)
 	{
 	case 1:
 	{
 		m_txt->AppendText("1");
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
 		break;
 	}
 	case 2:
 	{
 		m_txt->AppendText("2");
+			if (symbol == true)
+			{
+				if (num2 != 0)
+				{
+					_num2 = std::to_string(num2);
+					_num2 += std::to_string(evt.GetId());
+				}
+				else {
+					_num2 += std::to_string(evt.GetId());
+				}
+			}
 		break;
 	}
 	case 3:
 	{
 		m_txt->AppendText("3");
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
 		break;
 	}
 	case 4:
 	{
 		m_txt->AppendText("4");
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
 		break;
 	}
 	case 5:
 	{
 		m_txt->AppendText("5");
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
 		break;
 	}
 	case 6:
 	{
 		m_txt->AppendText("6");
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
 		break;
 	}
 	case 7:
 	{
 		m_txt->AppendText("7");
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
 		break;
 	}
 	case 8:
 	{
 		m_txt->AppendText("8");
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
 		break;
 	}
 	case 9:
 	{
 		m_txt->AppendText("9");
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
 		break;
 	}
 	case 10:
@@ -131,12 +241,18 @@ void Main::OnButtonClicked(wxCommandEvent& evt)
 	}
 	case 11:
 	{
+		_num1 = m_txt->GetValue();
 		m_txt->AppendText("+");
+		sym = "+";
+		symbol = true;
 		break;
 	}
 	case 12:
 	{
+		_num1 = m_txt->GetValue();
 		m_txt->AppendText("-");
+		sym = "-";
+		symbol = true;
 		break;
 	}
 	case 13:	//make number positive or negative
@@ -147,16 +263,33 @@ void Main::OnButtonClicked(wxCommandEvent& evt)
 	case 14:
 	{
 		m_txt->AppendText("0");
+		if (symbol == true)
+		{
+			if (num2 != 0)
+			{
+				_num2 = std::to_string(num2);
+				_num2 += std::to_string(evt.GetId());
+			}
+			else {
+				_num2 += std::to_string(evt.GetId());
+			}
+		}
 		break;
 	}
 	case 15:
 	{
+		_num1 = m_txt->GetValue();
 		m_txt->AppendText("/");
+		sym = "/";
+		symbol = true;
 		break;
 	}
 	case 16:
 	{
+		_num1 = m_txt->GetValue();
 		m_txt->AppendText("*");
+		sym = "*";
+		symbol = true;
 		break;
 	}
 	case 17:
@@ -182,6 +315,34 @@ void Main::OnButtonClicked(wxCommandEvent& evt)
 	case 21:
 	{
 		m_txt->AppendText("=");
+		if (sym == "+")
+		{
+			num1 = wxAtoi(_num1);
+			num2 = wxAtoi(_num2);
+			m_txt->Clear();
+			m_txt->AppendText(processor->GetAddition(num1, num2));
+		}
+		else if (sym == "-")
+		{
+			num1 = wxAtoi(_num1);
+			num2 = wxAtoi(_num2);
+			m_txt->Clear();
+			m_txt->AppendText(processor->GetSubtraction(num1, num2));
+		}
+		else if (sym == "*")
+		{
+			num1 = wxAtoi(_num1);
+			num2 = wxAtoi(_num2);
+			m_txt->Clear();
+			m_txt->AppendText(processor->GetMult(num1, num2));
+		}
+		else if (sym == "/")
+		{
+			num1 = wxAtoi(_num1);
+			num2 = wxAtoi(_num2);
+			m_txt->Clear();
+			m_txt->AppendText(processor->GetDivide(num1, num2));
+		}
 		break;
 	}
 	}
