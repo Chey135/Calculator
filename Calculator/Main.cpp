@@ -1,6 +1,12 @@
 #include "Main.h"
 #include "ButtonFactory.h"
 #include "CalculatorProcessor.h"
+#include <vector>
+#include "AddCommand.h"
+#include "SubtractionCommand.h"
+#include "MultiplyCommand.h"
+#include "DivideCommand.h"
+#include "IBaseCommand.h"
 
 wxBEGIN_EVENT_TABLE(Main, wxFrame)
 EVT_BUTTON(21, Main::OnButtonClicked)
@@ -30,6 +36,8 @@ wxString _num1 = "";
 wxString _num2 = "";
 bool symbol = false;
 wxString sym = "";
+
+std::vector<IBaseCommand*>commands;
 
 Main::Main() : wxFrame(nullptr, wxID_ANY, "Calculator - wxwidgets!", wxPoint(30,30), wxSize(265,445))
 {
@@ -74,20 +82,7 @@ void Main::OnButtonClicked(wxCommandEvent& evt)
 {
 	CalculatorProcessor* processor = CalculatorProcessor::GetInstance();
 	int id = evt.GetId();
-	/*if (evt.GetId() >= 1 && evt.GetId() < 10 && evt.GetId() == 14)
-	{
-		if (symbol == true)
-		{
-			if (num2 != 0)
-			{
-				_num2 = std::to_string(num2);
-				_num2 += std::to_string(evt.GetId());
-			}
-			else {
-				_num2 += std::to_string(evt.GetId());
-			}
-		}
-	}*/
+	
 	switch (id)
 	{
 	case 1:
@@ -237,6 +232,14 @@ void Main::OnButtonClicked(wxCommandEvent& evt)
 	case 10:
 	{
 		m_txt->Clear();
+		commands.clear();
+		_num1.clear();
+		_num1 = "";
+		_num2.clear();
+		_num2 = "";
+		num1 = 0;
+		num2 = 0;
+		symbol = false;
 		break;
 	}
 	case 11:
@@ -305,11 +308,13 @@ void Main::OnButtonClicked(wxCommandEvent& evt)
 	case 19:
 	{
 		m_txt->AppendText("Hex");
+		
 		break;
 	}
 	case 20:
 	{
 		m_txt->AppendText("Dec");
+		
 		break;
 	}
 	case 21:
@@ -320,28 +325,68 @@ void Main::OnButtonClicked(wxCommandEvent& evt)
 			num1 = wxAtoi(_num1);
 			num2 = wxAtoi(_num2);
 			m_txt->Clear();
-			m_txt->AppendText(processor->GetAddition(num1, num2));
+			AddCommand addd(processor, num1, num2);
+			commands.push_back(&addd);
+			for (size_t i = 0; i < commands.size(); i++)
+			{
+				m_txt->AppendText(commands[i]->Execute());
+			}
+			commands.clear();
+			_num1.clear();
+			_num2.clear();
+			num1 = 0;
+			num2 = 0;
 		}
 		else if (sym == "-")
 		{
 			num1 = wxAtoi(_num1);
 			num2 = wxAtoi(_num2);
 			m_txt->Clear();
-			m_txt->AppendText(processor->GetSubtraction(num1, num2));
+			SubtractionCommand sub(processor, num1, num2);
+			commands.push_back(&sub);
+			for (size_t i = 0; i < commands.size(); i++)
+			{
+				m_txt->AppendText(commands[i]->Execute());
+			}
+			commands.clear();
+			_num1.clear();
+			_num2.clear();
+			num1 = 0;
+			num2 = 0;
 		}
 		else if (sym == "*")
 		{
 			num1 = wxAtoi(_num1);
 			num2 = wxAtoi(_num2);
 			m_txt->Clear();
-			m_txt->AppendText(processor->GetMult(num1, num2));
+			MultiplyCommand mult(processor, num1, num2);
+			commands.push_back(&mult);
+			for (size_t i = 0; i < commands.size(); i++)
+			{
+				m_txt->AppendText(commands[i]->Execute());
+			}
+			commands.clear();
+			_num1.clear();
+			_num2.clear();
+			num1 = 0;
+			num2 = 0;
 		}
 		else if (sym == "/")
 		{
 			num1 = wxAtoi(_num1);
 			num2 = wxAtoi(_num2);
 			m_txt->Clear();
-			m_txt->AppendText(processor->GetDivide(num1, num2));
+			DivideCommand di(processor, num1, num2);
+			commands.push_back(&di);
+			for (size_t i = 0; i < commands.size(); i++)
+			{
+				m_txt->AppendText(commands[i]->Execute());
+			}
+			commands.clear();
+			_num1.clear();
+			_num2.clear();
+			num1 = 0;
+			num2 = 0;
 		}
 		break;
 	}

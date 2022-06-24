@@ -143,14 +143,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AddCommand.h" />
     <ClInclude Include="ButtonFactory.h" />
     <ClInclude Include="CalcApp.h" />
     <ClInclude Include="CalculatorProcessor.h" />
+    <ClInclude Include="DivideCommand.h" />
+    <ClInclude Include="IBaseCommand.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="MultiplyCommand.h" />
+    <ClInclude Include="SubtractionCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ButtonFactory.cpp" />
     <ClCompile Include="CalcApp.cpp" />
+    <ClCompile Include="IBaseCommand.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

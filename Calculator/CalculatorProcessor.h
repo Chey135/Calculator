@@ -6,11 +6,8 @@ private:
     static CalculatorProcessor* _processor;
     int baseNumber;
     CalculatorProcessor() {};//empty
+
 public:
-
-    CalculatorProcessor(CalculatorProcessor& other) = delete;
-    void operator=(const CalculatorProcessor& other) = delete;
-
     static CalculatorProcessor* GetInstance()
     {
         if (_processor == nullptr)
@@ -19,6 +16,9 @@ public:
         }
         return _processor;
     }
+
+    CalculatorProcessor(CalculatorProcessor& other) = delete;
+    void operator=(const CalculatorProcessor& other) = delete;
 
     void SetBaseNumber(int number) {
         baseNumber = number;
